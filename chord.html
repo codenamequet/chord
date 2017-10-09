@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Chord</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/style.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		 crossorigin="anonymous"></script>
+		<script src="js/WebAudioRecorder.min.js"></script>
+	</head>
+	<body>
+		<a href="javascript:null">Record</a>	
+
+
+		<script>
+			$(function(){
+
+				var audioRecorder = initAudio();
+				console.log(audioRecorder);
+
+				function initAudio(){
+					window.AudioContext = window.AudioContext ||
+							window.webkitAudioContext;
+
+						var context = new AudioContext();
+
+						navigator.getUserMedia({ audio: true }, function (stream) {
+							var microphone = context.createMediaStreamSource(stream);
+
+							audioRecorder = new WebAudioRecorder(microphone, {
+									workerDir: "js/"     // must end with slash
+								});
+						}, errorCallback);
+				}
+
+				$('a').click(function(){
+				
+				});
+
+				function errorCallback(){
+					console.log('error');
+				}
+			});
+		</script>
+	</body>
+</html>
